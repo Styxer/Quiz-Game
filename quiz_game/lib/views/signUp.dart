@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_game/Models/customUser.dart';
+import 'package:quiz_game/services/auth.dart';
+import 'package:quiz_game/shared/constants.dart';
+import 'package:quiz_game/shared/loading.dart';
+import 'package:quiz_game/views/home.dart';
 import 'package:quiz_game/views/signIn.dart';
 import 'package:quiz_game/widgets/widgest.dart';
 
@@ -12,6 +17,25 @@ class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   final double margin = 24;
   String name, email, password;
+  bool isLoading = false;
+
+  signUp() async{
+    if(_formKey.currentState.validate()){
+      AuthService authService = AuthService();
+
+      setState(() {
+        isLoading = true;
+      });
+      CustomUser result = await authService.signUpEmailAndPassword(email, password);
+
+      setState(() {
+        isLoading = false;
+      });
+
+      Navigator.pushReplacement(context, MaterialPageRoute(
+          builder: (context) => Home()));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +47,7 @@ class _SignUpState extends State<SignUp> {
         brightness: Brightness.light,
         centerTitle: true,
       ),
-      body: Form(
+      body: isLoading ? Loading() : Form(
         key: _formKey,
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: margin),
@@ -34,9 +58,7 @@ class _SignUpState extends State<SignUp> {
                 validator: (val) {
                   return val.isEmpty ? "Name cannot be empty" : null;
                 },
-                decoration: InputDecoration(
-                  hintText: "Name",
-                ),
+                decoration: textInputDecoration.copyWith(hintText: 'Name'),
                 onChanged: (val){
                   name = val;
                 },
@@ -45,21 +67,18 @@ class _SignUpState extends State<SignUp> {
                 validator: (val) {
                   return val.isEmpty ? "Email cannot be empty" : null;
                 },
-                decoration: InputDecoration(
-                  hintText: "Email",
-                ),
+                decoration: textInputDecoration.copyWith(hintText: 'Email'),
                 onChanged: (val){
                   email = val;
                 },
               ),//email
               SizedBox(height: 6,),
               TextFormField(
+                obscureText: true,
                 validator: (val) {
                   return val.isEmpty ? "Password cannot be empty" : null;
                 },
-                decoration: InputDecoration(
-                  hintText: "Password",
-                ),
+                decoration: textInputDecoration.copyWith(hintText: 'Password'),
                 onChanged: (val){
                   password = val;
                 },
@@ -68,7 +87,7 @@ class _SignUpState extends State<SignUp> {
               SizedBox(height: 24,),
               GestureDetector(
                 onTap: () {
-
+                  signUp();
                 },//btn sign up logic
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 18),
@@ -79,7 +98,7 @@ class _SignUpState extends State<SignUp> {
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width - margin * 2,
                   child: Text(
-                    'Sign in',
+                    'Sign up',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
