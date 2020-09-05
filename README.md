@@ -2,7 +2,7 @@ Quiz Game Will (try) and feture
 
 - [ ] Loging with
     - [ ] User name password
-    - [ ]facebook
+    - [ ] facebook
     - [ ] google+
 
 - [ ] Sign up
