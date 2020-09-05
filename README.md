@@ -9,7 +9,7 @@ Quiz Game Will (try) and feature
 
 - [ ] Use firebase/firestore
 
-- [ ] Create your own question and/or use (Api)[https://opentdb.com/]
+- [ ] Create your own question and/or use [Api](https://opentdb.com/)
 
 - [ ] Settings screen
 
