@@ -5,7 +5,7 @@ import 'package:quiz_game/shared/constants.dart';
 import 'package:quiz_game/shared/loading.dart';
 import 'package:quiz_game/views/home.dart';
 import 'package:quiz_game/views/signIn.dart';
-import 'package:quiz_game/widgets/widgest.dart';
+import 'package:quiz_game/widgets/widgets.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -46,13 +46,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: appBar(context),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        brightness: Brightness.light,
-        centerTitle: true,
-      ),
+      appBar: mainAppBar(context),
       body: isLoading ? Loading() : Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -96,22 +90,7 @@ class _SignUpState extends State<SignUp> {
                   onTap: () {
                     signUp();
                   },//btn sign up logic
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 18),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width - margin * 2,
-                    child: Text(
-                      'Sign up',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
+                  child: blueButton(context, 'Sign Up'),
                 ),//sign in btn container
                 SizedBox(height: 18,),
                 Row(

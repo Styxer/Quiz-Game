@@ -6,7 +6,7 @@ import 'package:quiz_game/shared/constants.dart';
 import 'package:quiz_game/shared/loading.dart';
 import 'package:quiz_game/views/home.dart';
 import 'package:quiz_game/views/signUp.dart';
-import 'package:quiz_game/widgets/widgest.dart';
+import 'package:quiz_game/widgets/widgets.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -49,13 +49,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: appBar(context),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        brightness: Brightness.light,
-        centerTitle: true,
-      ),
+      appBar: mainAppBar(context),
       body:  isLoading ? Loading() : Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -92,22 +86,7 @@ class _SignInState extends State<SignIn> {
                   onTap: () async {
                     await signIn();
                   },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 18),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width - margin * 2,
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
+                  child: blueButton(context, 'Sign in'),
                 ),//sign in btn container
                 SizedBox(height: 18,),
                 Row(
@@ -159,6 +138,11 @@ class _SignInState extends State<SignIn> {
       ),
     );//Scaffold
   }
+
+
 }
+
+
+
 
 
