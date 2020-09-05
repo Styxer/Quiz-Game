@@ -16,24 +16,30 @@ class _SignUpState extends State<SignUp> {
 
   final _formKey = GlobalKey<FormState>();
   final double margin = 24;
-  String name, email, password;
+  String name, email, password , error = '';
   bool isLoading = false;
 
   signUp() async{
     if(_formKey.currentState.validate()){
       AuthService authService = AuthService();
-
       setState(() {
         isLoading = true;
       });
-      CustomUser result = await authService.signUpEmailAndPassword(email, password);
+      await authService.signUpEmailAndPassword(email, password)
+          .then((value){
+        //print('me $value');
+        Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (context) => Home()));
 
-      setState(() {
-        isLoading = false;
+      }).catchError((err){
+        setState(() {
+          error = err.toString();
+        });
       });
 
-      Navigator.pushReplacement(context, MaterialPageRoute(
-          builder: (context) => Home()));
+      setState(() {
+        isLoading= false;
+      });
     }
   }
 
@@ -138,6 +144,16 @@ class _SignUpState extends State<SignUp> {
 
                 ],
               ),//sign up
+
+
+              SizedBox(height: 12,),
+              Text(
+                error,
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 14,
+                ),
+              ),
 
               SizedBox(height: 80,),
             ],

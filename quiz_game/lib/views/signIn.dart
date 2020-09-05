@@ -28,16 +28,21 @@ class _SignInState extends State<SignIn> {
       setState(() {
         isLoading = true;
       });
-      CustomUser result =  await authService.signInEmailAndPassword(email, password);
-     // if(result == null){
+      await authService.signInEmailAndPassword(email, password)
+      .then((value){
+          //print('me $value');
+          Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (context) => Home()));
+
+      }).catchError((err){
         setState(() {
-          error = "abc";
+            error = err.toString();
+        });
+      });
+
+        setState(() {
           isLoading= false;
         });
-
-        Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) => Home()));
-      //}
     }
   }
 
@@ -80,8 +85,8 @@ class _SignInState extends State<SignIn> {
               ),//password
 
               SizedBox(height: 24,),
-              
-              
+
+
               GestureDetector(
                 onTap: () async {
                   await signIn();
