@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_game/Models/customUser.dart';
 import 'package:quiz_game/services/auth.dart';
 import 'package:quiz_game/shared/constants.dart';
+import 'package:quiz_game/shared/functions.dart';
 import 'package:quiz_game/shared/loading.dart';
 import 'package:quiz_game/views/home.dart';
 import 'package:quiz_game/views/signIn.dart';
@@ -27,7 +28,7 @@ class _SignUpState extends State<SignUp> {
       });
       await authService.signUpEmailAndPassword(email, password)
           .then((value){
-        //print('me $value');
+        HelperFunctions.saveUserLoggedInDetails(isLoggedIn: true);
         Navigator.pushReplacement(context, MaterialPageRoute(
             builder: (context) => Home()));
 

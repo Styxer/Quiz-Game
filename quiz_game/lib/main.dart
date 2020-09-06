@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz_game/shared/functions.dart';
+import 'package:quiz_game/views/home.dart';
 import 'package:quiz_game/views/signIn.dart';
 
 void main() async {
@@ -8,7 +10,30 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  bool _isLoggedIn = false;
+
+  @override
+  void initState() {
+    checkUserLoggedInStatus();
+    super.initState();
+  }
+
+  checkUserLoggedInStatus() async{
+    HelperFunctions.getUserLoggedInDetails()
+    .then((value) {
+      setState(() {
+        _isLoggedIn = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +43,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SignIn(),
+      home: (_isLoggedIn ?? false) ? Home() : SignIn(),
     );
   }
 }
