@@ -90,7 +90,7 @@ class _SignUpState extends State<SignUp> {
                   onTap: () {
                     signUp();
                   },//btn sign up logic
-                  child: blueButton(context, 'Sign Up'),
+                    child: blueButton(context:  context, text: 'sign ip'),
                 ),//sign in btn container
                 SizedBox(height: 18,),
                 Row(

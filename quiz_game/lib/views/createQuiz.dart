@@ -7,6 +7,11 @@ import 'package:quiz_game/widgets/widgets.dart';
 import 'package:random_string/random_string.dart';
 
 class CreateQuiz extends StatefulWidget {
+  final String quidID;
+
+
+  CreateQuiz({this.quidID});
+
   @override
   _CreateQuizState createState() => _CreateQuizState();
 }
@@ -19,6 +24,8 @@ class _CreateQuizState extends State<CreateQuiz> {
   String quizID;
   DatabaseService _databaseService = DatabaseService();
   bool isLoading = false;
+
+
 
   createQuiz() async{
     if(_formKey.currentState.validate()){
@@ -37,7 +44,9 @@ class _CreateQuizState extends State<CreateQuiz> {
          .then((value){
 
        Navigator.pushReplacement(context, MaterialPageRoute(
-           builder: (context) => AddQuestion()));
+           builder: (context) => AddQuestion(
+              quizID: quizID,
+           )));
 
      }).catchError((err){
        setState(() {
@@ -85,7 +94,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                   onTap: (){
                     createQuiz();
                   },
-                  child: blueButton(context, "Create Quiz")),
+                  child: blueButton(context : context, text : "Create Quiz")),
                 SizedBox(height: 12,),
                 Text(
                   error,

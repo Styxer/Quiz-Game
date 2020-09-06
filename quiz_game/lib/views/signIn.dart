@@ -86,7 +86,7 @@ class _SignInState extends State<SignIn> {
                   onTap: () async {
                     await signIn();
                   },
-                  child: blueButton(context, 'Sign in'),
+                  child: blueButton(context:  context, text: 'sign in'),
                 ),//sign in btn container
                 SizedBox(height: 18,),
                 Row(

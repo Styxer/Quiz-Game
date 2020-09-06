@@ -30,12 +30,13 @@ Widget mainAppBar(BuildContext context) {
     backgroundColor: Colors.transparent,
     elevation: 0,
     brightness: Brightness.light,
+    iconTheme: IconThemeData(color : Colors.black87),
     centerTitle: true,
   );
 }
 
 
-  Widget blueButton(BuildContext context, String s) {
+  Widget blueButton({BuildContext context, String text,double buttonWidth}) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 18),
       decoration: BoxDecoration(
@@ -43,9 +44,9 @@ Widget mainAppBar(BuildContext context) {
         borderRadius: BorderRadius.circular(30),
       ),
       alignment: Alignment.center,
-      width: MediaQuery.of(context).size.width - margin * 2,
+      width: buttonWidth != null ? buttonWidth : MediaQuery.of(context).size.width - margin * 2,
       child: Text(
-        s,
+        text,
         style: TextStyle(
           color: Colors.white,
           fontSize: 16,
