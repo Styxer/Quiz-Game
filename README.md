@@ -1,18 +1,18 @@
-Quiz Game Will (try) and feture
+Quiz Game Will (try) and feature
 
-1.Loging with
-    a.User name password
-    b.facebook
-    c.google+
+- [ ] Logging with
+    - [ ] User name password
+    - [ ] Facebook
+    - [ ] Google+
 
-2.Sign up
+- [ ] Sign up
 
-3.use firebase/firestore
+- [ ] Use firebase/firestore
 
-4.create your own question and/or use Api(https://opentdb.com/)
+- [ ] Create your own question and/or use [Api](https://opentdb.com/)
 
-5.settings screen
+- [ ] Settings screen
 
-6.categories
+- [ ] Categories
 
-7.High Score
+- [ ] High Score
